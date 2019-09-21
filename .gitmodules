@@ -1,0 +1,7 @@
+[submodule "u-boot"]
+	path = u-boot
+	url = https://github.com/chrisPDX/u-boot-bc2020.git
+
+[submodule "ti-linux-kernel"]
+	path = ti-linux-kernel
+	url = https://github.com/chrisPDX/ti-linux-kernel-v4.19.69-bc2020.git
