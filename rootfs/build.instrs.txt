@@ -1,0 +1,45 @@
+To re-run existing build:
+	1. cd to yocto build directory
+	2. run TOOLCHAIN_PATH=....sroots/x86_64-arago-linux/usr/bin/arm-linux-gnueabihf- MACHINE=am335x-bcmax bitbake core-image-minimal
+
+New openembedded build setup?  Use 'setup_bcmax_oebuild.sh' & injects/ directory.  It really works! 
+
+Process Dev Notes:
+--------------------------------------------------------------------------------
+
+doc:
+http://processors.wiki.ti.com/index.php/Processor_SDK_Building_The_SDK#Build_Steps
+
+1. If behind a proxy, make gitproxy is setup (and squid is allowing 9418 CONNECT)
+-->Even after this, I typically have issues during bitbake runs with git:\\ urls.
+2. git clone git://arago-project.org/git/projects/oe-layersetup.git tisdk
+3. cd tidsk
+4. copy our coresdk-<blah><blah><blah> from bc2019_injects into configs/coresdk
+		^ defines what goes into core-image-minimal, distro, etc
+5. ./oe-layertool-setup.sh -f configs/coresdk/coresdk-<blah...
+6. Pull rest of files from bc2019_injects and copy them into the tree (script does this)
+	conf/local.conf
+		^ has our package definitions
+	sources/meta-ti/conf/machine/include/ti33x.inc
+		^ defines big include like kernel, u-boot, etc
+	sources/meta-ti/conf/machine/am335x-bcmax.conf
+		# don't forget this... it'll cost you a day of confusion!
+7. cd build
+8. . conf/setenv #yes, that's a dot-space for "source"
+9. for speediness, in local.conf:
+	BB_NUMBER_THREADS = "12"
+	PARALLEL_MAKE = "-j 12"
+10. build time:
+	#specifying toolchain_path to prevent bitbake from downloading & building the whole toolchain (see below for trace)
+	TOOLCHAIN_PATH= .... ti-processor-sdk-linux-am335x-evm-05.02.00.10/linux-devkit/sysroots/x86_64-arago-linux/usr/bin/arm-linux-gnueabihf- \
+	MACHINE=am335x-bcmax \
+	bitbake core-image-minimal
+11. takes <1hr to build everything from scratch
+
+TOOLCHAIN PATH ANALYSIS:
+in meta-ti/recipes-ti/includes/ti-paths.inc:
+	export TOOLCHAIN_PATH ?= "${STAGING_DIR_NATIVE}${prefix_native}/bin/${TARGET_SYS}"
+so, looks like it should be the form of:
+	.../bin/arm-linux-gnueabihf-
+	
+
