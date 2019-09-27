@@ -8,16 +8,14 @@ echo "Note: This is intended to be run from within the bcbuildr container for   
 echo "  the setup of a yocto/openembedded rootfs build environment."
 echo "========================================================================="
 sleep 3
-mkdir $1
-cd $1
 echo "Cloning arago/oe-layersetup.git... if this hangs, make sure gitproxy (.gitconfig) is working."
 git clone git://arago-project.org/git/projects/oe-layersetup.git arago
 echo "Injecting our config..."
 cd arago
 cp $INJECT_DIR/$INJECT_CFG configs/coresdk/
 ./oe-layertool-setup.sh -f configs/coresdk/$INJECT_CFG
-cp $INJECT_DIR/local.conf build/conf/
-cp $INJECT_DIR/bblayers.conf build/conf/
+#cp $INJECT_DIR/local.conf build/conf/
+#cp $INJECT_DIR/bblayers.conf build/conf/
 cp $INJECT_DIR/ti33x.inc sources/meta-ti/conf/machine/include/
 cp $INJECT_DIR/am335x-bcmax.conf sources/meta-ti/conf/machine/
 echo "sed'ing this build directory into bblayers.conf..."

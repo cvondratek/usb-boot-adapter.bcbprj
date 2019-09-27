@@ -20,11 +20,12 @@ require conf/machine/include/tune-cortexa8.inc
 MACHINE_KERNEL_PR = "r22"
 
 # Default providers, may need to override for specific machines
-#PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
 #PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
 #PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
 
-#KERNEL_IMAGETYPE = "zImage"
+PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
+KERNEL_IMAGETYPE = "zImage"
+KERNEL_DEVICETREE = "am335x-evmsk.dtb"
 
 #KERNEL_DEVICETREE = "am335x-evm.dtb am335x-evmsk.dtb \
 #                    am335x-icev2.dtb am335x-icev2-prueth.dtb \
@@ -47,7 +48,7 @@ MACHINE_KERNEL_PR = "r22"
 #CV EXTRA_IMAGEDEPENDS += "u-boot"
 
 # List common SoC features, may need to add touchscreen for specific machines
-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx"
+MACHINE_FEATURES = "apm usbgadget usbhost vfat ext2 ethernet"
 
 # Set the list of device targets for ti-pdk class recipes
 TI_PDK_LIMIT_SOCS = "am335x"

@@ -26,8 +26,9 @@ bitbake,git://git.openembedded.org/bitbake,1.40,HEAD
 meta-ti,git://git.yoctoproject.org/meta-ti,thud,HEAD,layers=
 #meta-linaro,git://git.linaro.org/openembedded/meta-linaro.git,thud,HEAD,layers=meta-linaro-toolchain:meta-optee
 oe-core,git://git.openembedded.org/openembedded-core,thud,HEAD,layers=meta
-OECORELAYERCONF=./sample-files/bblayers.conf.sample
-OECORELOCALCONF=./sample-files/local-arago64.conf.sample
+
+OECORELAYERCONF=../config/bblayers.conf
+OECORELOCALCONF=../config/local.conf
 
 
 
