@@ -1,2 +1,3 @@
 #!/bin/bash
-... enter build steps here
+echo "this is a build step"
+/bin/bash

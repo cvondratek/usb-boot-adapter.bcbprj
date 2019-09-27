@@ -11,13 +11,12 @@ doc:
 http://processors.wiki.ti.com/index.php/Processor_SDK_Building_The_SDK#Build_Steps
 
 1. If behind a proxy, make gitproxy is setup (and squid is allowing 9418 CONNECT)
--->Even after this, I typically have issues during bitbake runs with git:\\ urls.
 2. git clone git://arago-project.org/git/projects/oe-layersetup.git tisdk
 3. cd tidsk
-4. copy our coresdk-<blah><blah><blah> from bc2019_injects into configs/coresdk
+4. copy our coresdk-<blah><blah><blah> from ./conf into configs/coresdk
 		^ defines what goes into core-image-minimal, distro, etc
 5. ./oe-layertool-setup.sh -f configs/coresdk/coresdk-<blah...
-6. Pull rest of files from bc2019_injects and copy them into the tree (script does this)
+6. Pull rest of files from ./conf and copy them into the tree (script does this)
 	conf/local.conf
 		^ has our package definitions
 	sources/meta-ti/conf/machine/include/ti33x.inc
@@ -31,10 +30,10 @@ http://processors.wiki.ti.com/index.php/Processor_SDK_Building_The_SDK#Build_Ste
 	PARALLEL_MAKE = "-j 12"
 10. build time:
 	#specifying toolchain_path to prevent bitbake from downloading & building the whole toolchain (see below for trace)
-	TOOLCHAIN_PATH= .... ti-processor-sdk-linux-am335x-evm-05.02.00.10/linux-devkit/sysroots/x86_64-arago-linux/usr/bin/arm-linux-gnueabihf- \
+	TOOLCHAIN_PATH= <path-to>/bin/arm-linux-gnueabihf- \
 	MACHINE=am335x-bcmax \
 	bitbake core-image-minimal
-11. takes <1hr to build everything from scratch
+11. takes <1hr & 19GB to build everything from scratch
 
 TOOLCHAIN PATH ANALYSIS:
 in meta-ti/recipes-ti/includes/ti-paths.inc:
