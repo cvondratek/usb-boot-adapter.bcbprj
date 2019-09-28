@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#our build directory
+rm -rf /dev/shm/rootfs
+mkdir -p /dev/shm/rootfs
+cd /dev/shm/rootfs
+ln -s /workdir/rootfs/config config
+
 INJECT_DIR="$PWD/config"
 INJECT_CFG='coresdk-2018.05-mytoolchain-config.txt'
 
