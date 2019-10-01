@@ -1,10 +1,11 @@
 #!/bin/bash
 
-#call from within staging
+cd $CONFIG_BASE/staging/rootfs
 
 OLD_SZ=$(du -s ./)
 
 #rm [big] files that we don't need
+rm -rf usr/lib/opkg/alternatives
 rm usr/lib/libgtk* 
 rm -rf usr/lib/girepository*
 rm usr/lib/libX11* 
@@ -14,7 +15,7 @@ rm usr/lib/libharfbuzz*
 rm usr/lib/libfreetype* 
 rm usr/lib/libpixman* 
 rm usr/lib/libsamplerate* 
-#rm usr/lib/libunistring*  # needed for wpa-supplicant
+rm usr/lib/libunistring*  # needed for wpa-supplicant
 rm usr/lib/libgio* 
 rm usr/lib/libgmp* 
 rm usr/lib/libfontconfig* 
@@ -38,7 +39,7 @@ rm -rf etc/ipk-postinsts
 rm -rf etc/rcS.d/S99run-postinsts
 
 #inject
-tar xf ../config/rootfs_injects.tgz
+tar xf ../../rootfs/config/rootfs_injects.tgz
 
 NEW_SZ=$(du -s ./)
 

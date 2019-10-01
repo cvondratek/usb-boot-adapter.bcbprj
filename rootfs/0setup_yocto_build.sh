@@ -1,13 +1,13 @@
 #!/bin/bash
 
-#our build directory
-rm -rf /dev/shm/rootfs
-mkdir -p /dev/shm/rootfs
-cd /dev/shm/rootfs
-ln -s /workdir/rootfs/config config
+#clean build directory
+rm -rf $BUILD_BASE/rootfs
+mkdir -p $BUILD_BASE/rootfs
+cd $BUILD_BASE/rootfs
+ln -s $CONFIG_BASE/config config
 
 INJECT_DIR="$PWD/config"
-INJECT_CFG='coresdk-2018.05-mytoolchain-config.txt'
+INJECT_CFG="coresdk-2018.05-mytoolchain-config.txt"
 
 echo "=========================================================================="
 echo "Note: This is intended to be run from within the bcbuildr container for   "
@@ -20,15 +20,11 @@ echo "Injecting our config..."
 cd arago
 cp $INJECT_DIR/$INJECT_CFG configs/coresdk/
 ./oe-layertool-setup.sh -f configs/coresdk/$INJECT_CFG
-#cp $INJECT_DIR/local.conf build/conf/
-#cp $INJECT_DIR/bblayers.conf build/conf/
 cp $INJECT_DIR/ti33x.inc sources/meta-ti/conf/machine/include/
 cp $INJECT_DIR/am335x-bcmax.conf sources/meta-ti/conf/machine/
 echo "sed'ing this build directory into bblayers.conf..."
 sed -i "s#UPDATEME#${PWD}#g" build/conf/bblayers.conf
 cd build
-#nano conf/local.conf
-#nano conf/bblayers.conf
 echo "SETUP DONE!"
 echo "To build: "
 echo "   source conf/setenv"

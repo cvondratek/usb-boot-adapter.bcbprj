@@ -1,10 +1,6 @@
 [submodule "u-boot"]
 	path = u-boot
-	url = https://github.com/chrisPDX/u-boot-bc2020.git
-
+	url = https://github.com/cvondratek/u-boot-bc2020.git
 [submodule "ti-linux-kernel"]
 	path = ti-linux-kernel
-	url = https://github.com/chrisPDX/ti-linux-kernel-v4.19.69-bc2020.git
-[submodule "zwave_switcher/openzwave-1.3"]
-	path = zwave_switcher/openzwave-1.3
-	url = https://github.com/OpenZWave/open-zwave.git
+	url = https://github.com/cvondratek/ti-linux-kernel-v4.19.69-bc2020.git
