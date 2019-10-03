@@ -15,7 +15,7 @@ tar xf $IMG_PATH/core-image-minimal-am335x-bcmax.tar.xz
 
 #if using yocto kernel:
 #tar xf $IMG_PATH/modules-am335x-bcmax.tgz
-#cp     $IMG_PATH/am335x-bcmax/zImage ..
-#cp     $IMG_PATH/am335x-bcmax.dtb ..
+#cp     $IMG_PATH/zImage ..
+#cp     $IMG_PATH/am335x-boneblack.dtb ..
 
 

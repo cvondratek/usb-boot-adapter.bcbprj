@@ -2,7 +2,7 @@
 
 cd $CONFIG_BASE/staging/rootfs
 
-OLD_SZ=$(du -s ./)
+OLD_SZ=$(du -sh0 ./ | cut -f1)
 
 #rm [big] files that we don't need
 rm -rf usr/lib/opkg/alternatives
@@ -41,11 +41,12 @@ rm -rf etc/rcS.d/S99run-postinsts
 #inject
 tar xf ../../rootfs/config/rootfs_injects.tgz
 
-NEW_SZ=$(du -s ./)
+NEW_SZ=$(du -sh0 ./ | cut -f1)
 
 echo "=========================================================================="
-echo "Org size: ${OLD_SZ}."
-echo "New size: ${NEW_SZ}."
-echo "(in 1kB blocks)"
+echo "Original rootfs size: ${OLD_SZ}"
+echo "Stripped & injected:  ${NEW_SZ}"
 echo "=========================================================================="
+
+
 

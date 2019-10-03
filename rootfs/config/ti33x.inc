@@ -25,7 +25,7 @@ MACHINE_KERNEL_PR = "r22"
 
 #PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
 #KERNEL_IMAGETYPE = "zImage"
-#KERNEL_DEVICETREE = "am335x-evmsk.dtb"
+#KERNEL_DEVICETREE = "am335x-boneblack.dtb"
 
 #KERNEL_DEVICETREE = "am335x-evm.dtb am335x-evmsk.dtb \
 #                    am335x-icev2.dtb am335x-icev2-prueth.dtb \
