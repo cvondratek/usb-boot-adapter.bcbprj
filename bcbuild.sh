@@ -11,13 +11,17 @@ fi
 #u-boot, built in-place, not on BUILD_BASE
 echo "$ME: Running u-boot build"
 cd u-boot
-make CROSS_COMPILE=/opt/toolchains/gcc-arm-8.3-2019.03-x86_64-arm-linux-gnueabihf/bin/arm-linux-gnueabihf- am335x_evm_defconfig
-make CROSS_COMPILE=/opt/toolchains/gcc-arm-8.3-2019.03-x86_64-arm-linux-gnueabihf/bin/arm-linux-gnueabihf- -j10 2>&1 | tee ../u-boot.log
-cp u-boot.bin $CONFIG_BASE/staging
+make CROSS_COMPILE=/opt/toolchains/gcc-arm-8.3-2019.03-x86_64-arm-linux-gnueabihf/bin/arm-linux-gnueabihf- distclean
+make CROSS_COMPILE=/opt/toolchains/gcc-arm-8.3-2019.03-x86_64-arm-linux-gnueabihf/bin/arm-linux-gnueabihf- am335x_evm_bcb_defconfig
+make CROSS_COMPILE=/opt/toolchains/gcc-arm-8.3-2019.03-x86_64-arm-linux-gnueabihf/bin/arm-linux-gnueabihf- -j10
+cp u-boot.img $CONFIG_BASE/staging
 cp MLO $CONFIG_BASE/staging
 cp MLO.byteswap $CONFIG_BASE/staging
 cp spl/u-boot-spl.bin $CONFIG_BASE/staging
 cd ..
+
+
+exit
 
 #rootfs
 echo "$ME: Running rootfs build"
