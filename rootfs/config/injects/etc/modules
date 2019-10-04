@@ -1,0 +1,5 @@
+#works
+#g_ether
+
+#works
+#g_multi file=/dev/mmcblk0 removable=y stall=0 iSerialNumber=1234567890 host_addr=aa:bb:cc:dd:ee:ff

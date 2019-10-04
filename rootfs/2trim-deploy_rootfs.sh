@@ -39,7 +39,8 @@ rm -rf etc/ipk-postinsts
 rm -rf etc/rcS.d/S99run-postinsts
 
 #inject
-tar xf ../../rootfs/config/rootfs_injects.tgz
+cp -av ../../rootfs/config/injects/* .
+#tar xf ../../rootfs/config/rootfs_injects.tgz
 
 NEW_SZ=$(du -sh0 ./ | cut -f1)
 

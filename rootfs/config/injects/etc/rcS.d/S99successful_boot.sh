@@ -1,0 +1,1 @@
+../init.d/successful_boot.sh

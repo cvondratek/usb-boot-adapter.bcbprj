@@ -1,0 +1,19 @@
+#!/bin/sh
+# bcbuildr overlayfs, for brick-proofiness
+/sbin/getty 115200 ttyO0
+
+if [ -b /dev/mmcblk0p1 ]; then
+	mount -o noatime /dev/mmcblk0p1 /mnt/mmc
+	# check for BAD_CARD flag
+	if [ ! -f /mnt/mmc/BAD_CARD ]; then
+		# ok, now make sure card is setup correctly
+		if [[ -d /mnt/mmc/overlay && -d /mnt/mmc/work ]]; then
+			mount -t overlay overlay -o noatime,lowerdir=/,upperdir=/mnt/mmc/overlay,workdir=/mnt/mmc/work /mnt/overlay
+			/sbin/pivot_root /mnt/overlay/ /mnt/overlay/mnt/oldroot
+		fi
+	fi
+	umount /dev/mmcblk0p1
+fi
+
+exec /sbin/init
+

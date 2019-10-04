@@ -1,0 +1,2 @@
+KERNEL=="usb[0-9]*", DRIVERS=="cdc_ether", ACTION=="add"
+SUBSYSTEM=="net",ACTION=="add",KERNEL=="usb0",RUN+="/etc/udev/scripts/usbnet.sh"

@@ -1,0 +1,6 @@
+DISK=/tmp/usbmsd.disk
+MOUNT=/mnt/loop
+WATCH=/tmp/zephyr.elf
+DUT_PWR_ON=/home/root/ozw/node2-on
+DUT_PWR_ON=/home/root/ozw/node2-off
+
