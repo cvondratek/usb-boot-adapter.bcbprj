@@ -4,7 +4,7 @@
 rm -rf $BUILD_BASE/rootfs
 mkdir -p $BUILD_BASE/rootfs
 cd $BUILD_BASE/rootfs
-ln -s $CONFIG_BASE/config config
+ln -s $CONFIG_BASE/rootfs/config config
 
 INJECT_DIR="$PWD/config"
 INJECT_CFG="coresdk-2018.05-mytoolchain-config.txt"
