@@ -6,7 +6,7 @@ ME="usb-boot-adapter.bcbprj/bcbuild.sh"
 
 export CONFIG_BASE=$PWD #/workdir the container
 export BUILD_BASE=/dev/shm
-export KERNEL_PATH=$PWD/ti-linux-kernel/ti-linux-kernel-v4.19.69-bc2020
+export KERNEL_PATH=$PWD/ti-linux-kernel
 export CROSS=/opt/toolchains/gcc-arm-8.3-2019.03-x86_64-arm-linux-gnueabihf/bin/arm-linux-gnueabihf-
 
 #create staging directory if it does not exist
