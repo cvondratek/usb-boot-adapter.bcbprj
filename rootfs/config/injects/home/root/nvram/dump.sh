@@ -1,2 +1,5 @@
 #!/bin/sh
-cat /sys/bus/i2c/devices/2-0050/eeprom | gunzip -d
+
+source /bxb-board.conf
+BXB_NVRAM_SHADOW
+cat "$BXB_NVRAM_TMP"
