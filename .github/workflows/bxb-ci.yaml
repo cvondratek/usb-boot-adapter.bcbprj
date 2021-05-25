@@ -1,7 +1,7 @@
 name: bxb_ci
 on:
   push:
-    branches: [ usbtta_alpha ]
+    branches: [ usbtta-alpha ]
   pull_request:
     branches: [ main ]
 
