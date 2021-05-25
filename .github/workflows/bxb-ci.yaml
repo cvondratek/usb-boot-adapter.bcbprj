@@ -1,0 +1,21 @@
+name: bxb_ci
+on:
+  push:
+    branches: [ usbtta_alpha ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: maynard
+    steps:
+      - uses: actions/checkout@v2
+      - name: bxb build & run
+        run: |
+          git clone https://github.com/cvondratek/bxb-builder.git bxb && \
+          cd bxb && \
+          ./build.sh && \
+          ln -s $GITHUB_WORKSPACE workdir && \
+          ./run.sh
+
