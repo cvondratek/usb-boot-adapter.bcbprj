@@ -16,3 +16,17 @@ Work in progress, untested.
 1. get & cd bcbuildr
 2. ln -s <this directory> workdir
 3. ./run.sh
+4. Capture kernel .config in defconfig
+	cp .config arch/arm/configs/omap2plus_defconfig 
+5. Flash (emmc)
+	ssh root@bxb mount /dev/mmcblk1p1 /mnt
+	scp workdir/staging/* root@<ip of bcb>:/mnt
+	ssh root@bxb /sbin/reboot
+6. Add rootfs packages & rebuild:
+	nano rootfs/conf/local.conf
+	./run.sh
+7. Force rebuild of yocto rootfs w/o re-download
+	rm -rf /dev/shm/rootfs/arago/build/arago-tmp-glibc
+	rm -rf /dev/shm/rootfs/arago/build/cache
+	rm -rf /dev/shm/rootfs/arago/build/sstate-cache
+	./run.sh

@@ -4,6 +4,7 @@
 
 cd $BUILD_BASE/rootfs/arago/build && \
 source conf/setenv && \
+cp $CONFIG_BASE/rootfs/config/local.conf $BUILD_BASE/rootfs/arago/build/conf/local.conf && \
 TOOLCHAIN_PATH=/opt/toolchains/gcc-arm-8.3-2019.03-x86_64-arm-linux-gnueabihf/bin/arm-linux-gnueabihf- MACHINE=am335x-bcmax bitbake core-image-minimal
 echo ""
 cd $CONFIG_BASE/staging

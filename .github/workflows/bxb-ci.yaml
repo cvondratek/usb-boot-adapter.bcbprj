@@ -1,0 +1,36 @@
+name: bxb_ci
+on:
+  push:
+    branches: [ usbtta-alpha ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: maynard
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: bxb build & run
+        run: |
+          git clone https://github.com/cvondratek/bxb-builder.git bxb && \
+          cd bxb && \
+          ./build.sh && \
+          ln -s $GITHUB_WORKSPACE workdir && \
+          ./run.sh
+
+      - name: archive artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: all files
+          path: |
+            staging/zImage
+            staging/u-boot*
+            staging/MLO*
+            staging/bcbuildr_rootfs.squash
+            staging/*.dtb
+          retention-days: 5            
+            
