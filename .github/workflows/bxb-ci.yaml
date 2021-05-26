@@ -22,3 +22,15 @@ jobs:
           ln -s $GITHUB_WORKSPACE workdir && \
           ./run.sh
 
+      - name: archive artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: all files
+          path: |
+            $GITHUB_WORKSPACE/staging/zImage
+            $GITHUB_WORKSPACE/staging/u-boot*
+            $GITHUB_WORKSPACE/staging/MLO*
+            $GITHUB_WORKSPACE/staging/bcbuildr_rootfs.squash
+            $GITHUB_WORKSPACE/staging/*.dtb
+          retention-days: 5            
+            
