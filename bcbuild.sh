@@ -9,6 +9,8 @@ export BUILD_BASE=/dev/shm
 export KERNEL_PATH=$PWD/ti-linux-kernel
 export CROSS=/opt/toolchains/gcc-arm-8.3-2019.03-x86_64-arm-linux-gnueabihf/bin/arm-linux-gnueabihf-
 
+export MY_CORES=$(cat /proc/cpuinfo | grep siblings | awk '{print $3}' | tail -1)
+
 #create staging directory if it does not exist
 if [ ! -d ./staging ]; then
 	mkdir -p ./staging
@@ -20,7 +22,7 @@ if [ ! -f "$CONFIG_BASE/staging/u-boot.img" ]; then
 	cd u-boot
 	make CROSS_COMPILE=$CROSS distclean
 	make CROSS_COMPILE=$CROSS am335x_evm_bcb_defconfig
-	make CROSS_COMPILE=$CROSS -j10
+	make CROSS_COMPILE=$CROSS -j$MY_CORES
 	cp u-boot.img $CONFIG_BASE/staging
 	cp MLO $CONFIG_BASE/staging
 	cp MLO.byteswap $CONFIG_BASE/staging
@@ -52,10 +54,10 @@ if [ ! -f "$CONFIG_BASE/staging/zImage" ]; then
 	cd $KERNEL_PATH
 	cp .config .config.LAST
 	make ARCH=arm CROSS_COMPILE=$CROSS omap2plus_defconfig
-	make ARCH=arm CROSS_COMPILE=$CROSS menuconfig
+#	make ARCH=arm CROSS_COMPILE=$CROSS menuconfig
 	echo "$ME: (Eff-up? No worries, we saved a backup of .config to .config.LAST)"
-	make ARCH=arm CROSS_COMPILE=$CROSS -j10 zImage
-	make ARCH=arm CROSS_COMPILE=$CROSS -j10 modules
+	make ARCH=arm CROSS_COMPILE=$CROSS -j$MY_CORES zImage
+	make ARCH=arm CROSS_COMPILE=$CROSS -j$MY_CORES modules
 	make ARCH=arm CROSS_COMPILE=$CROSS am335x-boneblack.dtb
 	cp arch/arm/boot/zImage $CONFIG_BASE/staging
 	cp arch/arm/boot/dts/am335x-boneblack.dtb $CONFIG_BASE/staging
