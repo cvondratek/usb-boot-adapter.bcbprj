@@ -11,7 +11,9 @@ jobs:
     runs-on: maynard
     steps:
       - uses: actions/checkout@v2
-      - uses: textbook/git-checkout-submodule-action@master
+        with:
+          submodules: true
+
       - name: bxb build & run
         run: |
           git clone https://github.com/cvondratek/bxb-builder.git bxb && \
